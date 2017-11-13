@@ -1,0 +1,48 @@
+                 OTA Introduction
+
+                Content
+1. OTA Modules
+2. OTA Useage
+3. Demo code
+
+-----------------------------------------------------------------------------------------------
+
+1. OTA Module
+  1.1. OTA Downloader
+       OTA Downloader is a abstraction layer to support
+       a wide variety of download protocol.
+
+  1.1.1. OTA HTTP Downloader
+         OTA HTTP Downloader is a downloader to support HTTP protocol
+
+  1.2. Unpacker
+       Unpacker module used to upack a compress file which packed by Duer Cloud
+
+  1.3. Updater
+       Updater module used to call other OTA modules to update firmware
+
+  1.4. Zliblite
+       Decompression Library
+
+  1.5. Installer
+       Installer module used to installer firmware you get from Unpacker module
+       You need to implement it by yourself
+
+-----------------------------------------------------------------------------------------------
+
+2. OTA Useage
+   1. Implement struct IOtaUpdater which you can get the firmware that you upload
+      to Duer Cloud
+
+   2. Implement struct OTAInitOps
+      2.1. init_unpacker callback function which used to register a updater(struct IOtaUpdater)
+           and set your private data which you want to pass to installer module
+      2.2 reboot callback function which used to reboot system after update firmware
+
+   3. Call duer_init_ota() to init OTA module
+
+-----------------------------------------------------------------------------------------------
+
+3. Demo code
+
+$lightduer-device-demo/main/duerapp_ota.c
